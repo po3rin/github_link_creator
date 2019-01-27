@@ -51,7 +51,7 @@ jobs:
             # ./cc-test-reporter before-build
             go test ./... -coverprofile=c.out
             # ./cc-test-reporter after-build -d -r $CODE_CLIMATE_TOKEN --coverage-input-type gocov -p ./ --exit-code $?
-      - run
+      - run:
           name: Convert html
           command: go tool cover -html c.out -o c.html
 
