@@ -96,3 +96,9 @@ workflows:
   test:
     jobs:
       - test
+      - deploy_ecr:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
