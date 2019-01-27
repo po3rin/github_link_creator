@@ -62,7 +62,6 @@ func (d *drawer) SetColors(textColor color.RGBA) {
 // SetFontSize sets the fontSize.
 func (d *drawer) SetFontSize(fontSize float64) {
 	d.FontSize = fontSize
-	return
 }
 
 // SetTextPos sets the textPosition.
