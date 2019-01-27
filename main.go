@@ -49,6 +49,9 @@ func main() {
 	defer cancel()
 
 	l.Info("The service is shutting down...")
-	srv.Shutdown(ctx)
+	err := srv.Shutdown(ctx)
+	if err != nil {
+		l.Error("Failed to graceful shut down...")
+	}
 	l.Info("Done")
 }

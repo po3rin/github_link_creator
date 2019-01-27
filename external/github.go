@@ -31,7 +31,10 @@ func (r *Repository) GetRepoData(ctx context.Context, userName string, repoName 
 		return nil, err
 	}
 	repo := &entity.Repo{}
-	json.Unmarshal(body, repo)
+	err = json.Unmarshal(body, repo)
+	if err != nil {
+		return nil, err
+	}
 	return repo, nil
 }
 
@@ -53,7 +56,10 @@ func (r *Repository) GetUserData(ctx context.Context, userName string) (*entity.
 		return nil, err
 	}
 	user := &entity.User{}
-	json.Unmarshal(body, user)
+	err = json.Unmarshal(body, user)
+	if err != nil {
+		return nil, err
+	}
 	return user, nil
 }
 
