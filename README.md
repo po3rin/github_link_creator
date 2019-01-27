@@ -10,7 +10,7 @@
 
 GitHub Link Card Creator lets you generate GitHub images has links to repositories.
 
-<a href="https://github.com/po3rin/img2circle"><img src="example.png" width="50%"/></a>
+<a href="https://github.com/po3rin/github_link_creator"><img src="example.png" width="60%"/></a>
 
 ## Instalation
 
