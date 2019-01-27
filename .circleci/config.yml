@@ -1,0 +1,98 @@
+version: 2.1
+
+executors:
+  test:
+    docker:
+      - image: circleci/golang:1.11
+        environment:
+          GO111MODULE: "on"
+    working_directory: /go/src/github.com/po3rin/github_link_creator
+
+  docker_build:
+    docker:
+      - image: docker:18.05.0-ce
+
+  deploy_ecs:
+    docker:
+      - image: circleci/python
+
+jobs:
+  test:
+    executor:
+      name: test
+    steps:
+      - checkout
+      - setup_remote_docker
+
+      - restore_cache:
+          name: Restore go modules cache
+          keys:
+            - go-mod-v1-{{ checksum "go.sum" }}
+
+      - run:
+          name: Vendoring
+          command: go mod download
+
+      - save_cache:
+          name: Save go modules cache
+          key: go-mod-v1-{{ checksum "go.sum" }}
+          paths:
+            - "/go/pkg/mod"
+
+      # - run:
+      #     name: Setup Code Climate test-reporter
+      #     command: |
+      #       curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+      #       chmod +x ./cc-test-reporter
+
+      - run:
+          name: Run tests
+          command: |
+            # ./cc-test-reporter before-build
+            go test ./... -coverprofile=c.out
+            # ./cc-test-reporter after-build -d -r $CODE_CLIMATE_TOKEN --coverage-input-type gocov -p ./ --exit-code $?
+      - run
+          name: Convert html
+          command: go tool cover -html c.out -o c.html
+
+      - store_artifacts:
+          path: c.out
+          destination: c.out
+
+      - store_artifacts:
+          path: c.html
+          destination: c.html
+
+  deploy_ecr:
+    executor:
+      name: docker_build
+    steps:
+      - checkout
+      - setup_remote_docker
+
+      - run:
+          name: Install awscli for deploy
+          command: |
+            apk add --no-cache --update py-pip
+            pip install --upgrade pip
+            pip install awscli
+
+      - run:
+          name: Build docker image
+          command: |
+            pwd
+            cp Dockerfile.prod Dockerfile
+            docker build -t $CIRCLE_PROJECT_REPONAME .
+
+      - deploy:
+          name: deploy for ecs
+          command: |
+            $(aws ecr get-login --no-include-email --region ap-northeast-1)
+            docker tag $CIRCLE_PROJECT_REPONAME:latest $ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:latest
+            docker push $ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:latest
+
+workflows:
+  version: 2.1
+  test:
+    jobs:
+      - test

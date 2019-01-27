@@ -1,0 +1,72 @@
+package config
+
+import (
+	"image/color"
+	"io/ioutil"
+	"log"
+
+	"github.com/golang/freetype"
+	"github.com/golang/freetype/truetype"
+)
+
+// Text configs in image.
+type Text struct {
+	Size          float64
+	Color         color.RGBA
+	PosHorizontal int
+	PosVertical   int
+}
+
+var (
+	// Title is github repo name.
+	Title Text
+	// Description is github repo description.
+	Description Text
+	// Star is github repo star.
+	Star Text
+	// Fork is github repo fork.
+	Fork Text
+	// Font is common font.
+	Font *truetype.Font
+)
+
+var (
+	// BaseImgPath is base image path.
+	BaseImgPath = "src/base.png"
+)
+
+func init() {
+	setFont()
+
+	Title.Size = 34.0
+	Title.Color = color.RGBA{R: 3, G: 102, B: 214, A: 255}
+	Title.PosHorizontal = 286
+	Title.PosVertical = 80
+
+	Description.Size = 24.0
+	Description.Color = color.RGBA{R: 0, G: 0, B: 0, A: 255}
+	Description.PosHorizontal = 286
+	Description.PosVertical = 140
+
+	Star.Size = 28.0
+	Star.Color = color.RGBA{R: 0, G: 0, B: 0, A: 255}
+	Star.PosHorizontal = 332
+	Star.PosVertical = 256
+
+	Fork.Size = 28.0
+	Fork.Color = color.RGBA{R: 0, G: 0, B: 0, A: 255}
+	Fork.PosHorizontal = 456
+	Fork.PosVertical = 256
+}
+
+func setFont() {
+	fontBytes, err := ioutil.ReadFile("src/mplus-1c-regular.ttf")
+	if err != nil {
+		log.Fatal(err)
+	}
+	f, err := freetype.ParseFont(fontBytes)
+	if err != nil {
+		log.Fatal(err)
+	}
+	Font = f
+}
