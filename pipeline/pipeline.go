@@ -2,8 +2,10 @@ package pipeline
 
 import (
 	"context"
+	"fmt"
 	"image"
 	"strconv"
+	"strings"
 
 	"github.com/po3rin/github_link_creator/config"
 	"github.com/po3rin/github_link_creator/entity"
@@ -42,7 +44,28 @@ func ProcessingImg(ctx context.Context, r Repoitory, userName string, repoName s
 	}
 
 	img = DrawText(synthesizedImg, config.Title, repo.Name)
-	img = DrawText(img, config.Description, repo.Description)
+
+	if len(repo.Description) < 45 {
+		img = DrawText(img, config.FirstDescription, repo.Description)
+	} else {
+		desc := repo.Description
+		if len(repo.Description) > 86 {
+			desc = repo.Description[:86] + " ..."
+		}
+		words := strings.Split(desc, " ")
+		var firstline, secondline string
+		for _, w := range words {
+			firstline += w + " "
+			fmt.Println(firstline)
+			if len(firstline) >= 40 {
+				img = DrawText(img, config.FirstDescription, firstline)
+				secondline = strings.TrimPrefix(desc, firstline)
+				img = DrawText(img, config.SecondDescription, secondline)
+				break
+			}
+		}
+	}
+
 	img = DrawText(img, config.Star, strconv.Itoa(repo.Stars))
 	img = DrawText(img, config.Fork, strconv.Itoa(repo.Forks))
 

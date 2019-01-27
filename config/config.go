@@ -20,8 +20,10 @@ type Text struct {
 var (
 	// Title is github repo name.
 	Title Text
-	// Description is github repo description.
-	Description Text
+	// FirstDescription is github repo description in First line.
+	FirstDescription Text
+	// SecondDescription is github repo description in First line.
+	SecondDescription Text
 	// Star is github repo star.
 	Star Text
 	// Fork is github repo fork.
@@ -43,10 +45,15 @@ func init() {
 	Title.PosHorizontal = 286
 	Title.PosVertical = 80
 
-	Description.Size = 24.0
-	Description.Color = color.RGBA{R: 0, G: 0, B: 0, A: 255}
-	Description.PosHorizontal = 286
-	Description.PosVertical = 140
+	FirstDescription.Size = 24.0
+	FirstDescription.Color = color.RGBA{R: 0, G: 0, B: 0, A: 255}
+	FirstDescription.PosHorizontal = 286
+	FirstDescription.PosVertical = 140
+
+	SecondDescription.Size = 24.0
+	SecondDescription.Color = color.RGBA{R: 0, G: 0, B: 0, A: 255}
+	SecondDescription.PosHorizontal = 286
+	SecondDescription.PosVertical = 180
 
 	Star.Size = 28.0
 	Star.Color = color.RGBA{R: 0, G: 0, B: 0, A: 255}
