@@ -2,7 +2,6 @@ package pipeline
 
 import (
 	"context"
-	"fmt"
 	"image"
 	"strconv"
 	"strings"
@@ -56,7 +55,6 @@ func ProcessingImg(ctx context.Context, r Repoitory, userName string, repoName s
 		var firstline, secondline string
 		for _, w := range words {
 			firstline += w + " "
-			fmt.Println(firstline)
 			if len(firstline) >= 40 {
 				img = DrawText(img, config.FirstDescription, firstline)
 				secondline = strings.TrimPrefix(desc, firstline)

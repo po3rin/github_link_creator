@@ -8,7 +8,7 @@
 
 <img src="https://img.shields.io/badge/go-v1.11-blue.svg"/> [![CircleCI](https://circleci.com/gh/po3rin/github_link_creator.svg?style=shield)](https://circleci.com/gh/po3rin/github_link_creator) <a href="https://codeclimate.com/github/po3rin/github_link_creator/maintainability"><img src="https://api.codeclimate.com/v1/badges/174111b317186d299133/maintainability" /></a> [![GolangCI](https://golangci.com/badges/github.com/po3rin/github_link_creator.svg)](https://golangci.com)
 
-GitHub Link Card Creator lets you generate GitHub images has links to repositories.
+GitHub Link Card Creator lets you generate GitHub images has links to your repositories. This card is useful to guide you to your repository in blogs etc.
 
 <a href="https://github.com/po3rin/github_link_creator"><img src="example_card.png" width="60%"/></a>
 
