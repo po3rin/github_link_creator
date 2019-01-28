@@ -12,7 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GetImage create GitHub Card Image.
+// GetCode create GitHub Card Image.
 func (h *Handler) GetCode(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(c.Request.Context(), env.Timeout*time.Second)
 	defer cancel()

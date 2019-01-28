@@ -2,7 +2,6 @@ package entity
 
 // User has name field.
 type User struct {
-	Name      string `json:"name"`
 	AvatarURL string `json:"avatar_url"`
 }
 
@@ -13,4 +12,5 @@ type Repo struct {
 	Description string `json:"description"`
 	Forks       int    `json:"forks_count"`
 	Stars       int    `json:"stargazers_count"`
+	Owner       User   `json:"owner"`
 }

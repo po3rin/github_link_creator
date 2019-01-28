@@ -14,7 +14,6 @@ import (
 // Repoitory is espipeline repository interface.
 type Repoitory interface {
 	GetRepoData(ctx context.Context, userName string, repoName string) (*entity.Repo, error)
-	GetUserData(ctx context.Context, userName string) (*entity.User, error)
 	GetUserImage(ctx context.Context, avatarURL string) (image.Image, error)
 }
 
@@ -25,11 +24,7 @@ func ProcessingImg(ctx context.Context, r Repoitory, userName string, repoName s
 	if err != nil {
 		return nil, err
 	}
-	user, err := r.GetUserData(ctx, userName)
-	if err != nil {
-		return nil, err
-	}
-	img, err := r.GetUserImage(ctx, user.AvatarURL)
+	img, err := r.GetUserImage(ctx, repo.Owner.AvatarURL)
 	if err != nil {
 		return nil, err
 	}

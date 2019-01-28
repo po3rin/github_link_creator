@@ -11,6 +11,10 @@ var (
 	Port string
 	// LogLevel - logging level.
 	LogLevel string
+	// GithubClientID - github client id
+	GithubClientID string
+	// GithubSecret - github client id
+	GithubSecret string
 )
 
 const (
@@ -31,10 +35,15 @@ func init() {
 	}
 	Port = port
 
-	logLevel := os.Getenv("LOG_LEVEL")
-	if logLevel == "" {
-		logLevel = defaultLogLevel
-		l.Warnf("LOG_LEVEL environment is not exists. use default value %s", defaultLogLevel)
+	githubClientID := os.Getenv("GITHUB_CLIRNT_ID")
+	if githubClientID == "" {
+		l.Warnf("GITHUB_CLIRNT_ID environment is not exists.")
 	}
-	LogLevel = logLevel
+	GithubClientID = githubClientID
+
+	githubSecret := os.Getenv("GITHUB_SECRET")
+	if githubSecret == "" {
+		l.Warnf("GITHUB_SECRET environment is not exists.")
+	}
+	GithubSecret = githubSecret
 }
