@@ -91,7 +91,9 @@ jobs:
             docker tag $CIRCLE_PROJECT_REPONAME:latest $ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:latest
             docker push $ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:latest
 
-  executor: deploy_ecs
+  deploy_ecs:
+    executor:
+      name: deploy_ecs
     steps:
       - run:
           name: install cli
