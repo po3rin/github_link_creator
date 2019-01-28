@@ -91,6 +91,26 @@ jobs:
             docker tag $CIRCLE_PROJECT_REPONAME:latest $ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:latest
             docker push $ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:latest
 
+  executor: deploy_ecs
+    steps:
+      - run:
+          name: install cli
+          command: |
+            sudo pip install awscli
+            sudo apt-get install -y jq
+      - run:
+          name: install ecs-deploy
+          command: |
+            curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee /usr/bin/ecs-deploy
+            sudo chmod +x /usr/bin/ecs-deploy
+      - deploy:
+          name: deploy ecs
+          command: |
+            ecs-deploy -c ghlinkcard-cluster \
+              -n ghlinkcard \
+              -r ap-northeast-1 --timeout 240 \
+              -i $ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:latest
+
 workflows:
   version: 2.1
   test:
@@ -99,6 +119,12 @@ workflows:
       - deploy_ecr:
           requires:
             - test
+          filters:
+            branches:
+              only: master
+      - deploy_ecs:
+          requires:
+            - deploy_ecr
           filters:
             branches:
               only: master
