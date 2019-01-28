@@ -21,6 +21,6 @@ func NewRouter() *Router {
 func (r *Router) InitRouter() *gin.Engine {
 	router := gin.Default()
 	router.GET("/v1/health", r.Handler.HealthCheck)
-	router.GET("/v1/images/:user/:repo", r.Handler.GetImage)
+	router.GET("/v1/images/:user/:repo", r.Handler.GetCode)
 	return router
 }

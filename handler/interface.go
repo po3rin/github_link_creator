@@ -17,4 +17,5 @@ type Repo interface {
 	GetRepoData(ctx context.Context, userName string, repoName string) (*entity.Repo, error)
 	GetUserData(ctx context.Context, userName string) (*entity.User, error)
 	GetUserImage(ctx context.Context, avatarURL string) (image.Image, error)
+	UploadImg(img image.Image, Name string) (string, error)
 }

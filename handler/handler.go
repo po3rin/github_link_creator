@@ -3,7 +3,6 @@ package handler
 import (
 	"context"
 	"fmt"
-	"image/png"
 	"net/http"
 	"time"
 
@@ -14,7 +13,7 @@ import (
 )
 
 // GetImage create GitHub Card Image.
-func (h *Handler) GetImage(c *gin.Context) {
+func (h *Handler) GetCode(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(c.Request.Context(), env.Timeout*time.Second)
 	defer cancel()
 	doneCh := make(chan struct{})
@@ -28,11 +27,15 @@ func (h *Handler) GetImage(c *gin.Context) {
 			c.JSON(http.StatusInternalServerError, err.Error())
 			return
 		}
-		err = png.Encode(c.Writer, img)
+		location, err := h.Repo.UploadImg(img, userName+"/"+repoName)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, err.Error())
 			return
 		}
+		result := fmt.Sprintf(`<a href="https://github.com/%v/%v"><img src="%v" width="460px"></a>`, userName, repoName, location)
+		c.JSON(http.StatusOK, gin.H{
+			"value": result,
+		})
 		doneCh <- struct{}{}
 	}()
 
