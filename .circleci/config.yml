@@ -108,7 +108,7 @@ jobs:
       - deploy:
           name: deploy ecs
           command: |
-            ecs-deploy -c ghlinkcard-cluster \
+            ecs-deploy -c ghlinkcard-container \
               -n ghlinkcard \
               -r ap-northeast-1 --timeout 240 \
               -i $ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:latest
