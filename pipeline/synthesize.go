@@ -3,13 +3,13 @@ package pipeline
 import (
 	"image"
 	"image/draw"
-	"os"
 
 	"github.com/po3rin/github_link_creator/config"
+	"github.com/po3rin/github_link_creator/static"
 )
 
 func getBaseImg() (image.Image, error) {
-	file, err := os.Open(config.BaseImgPath)
+	file, err := static.Assets.Open(config.BaseImgPath)
 	if err != nil {
 		return nil, err
 	}

@@ -7,6 +7,7 @@ import (
 
 	"github.com/golang/freetype"
 	"github.com/golang/freetype/truetype"
+	"github.com/po3rin/github_link_creator/static"
 )
 
 // Text configs in image.
@@ -34,7 +35,7 @@ var (
 
 var (
 	// BaseImgPath is base image path.
-	BaseImgPath = "src/base.png"
+	BaseImgPath = "/base.png"
 )
 
 func init() {
@@ -67,7 +68,11 @@ func init() {
 }
 
 func setFont() {
-	fontBytes, err := ioutil.ReadFile("src/mplus-1c-regular.ttf")
+	file, err := static.Assets.Open("/mplus-1c-regular.ttf")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fontBytes, err := ioutil.ReadAll(file)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="GoReleaser Logo" src="src/gopher.jpg" height="100"/>
+  <img alt="GoReleaser Logo" src="gopher.jpg" height="100"/>
   <h3 align="center">GitHub Link Card Creater</h3>
   <p align="center">GitHub Link Card Creator lets you generate GitHub images has links to repositories.</p>
 </p>
