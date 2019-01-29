@@ -49,8 +49,6 @@ When raising the upper limit of API call of GitHub, You should set environment v
 
 ## Official Client
 
-<p style="color:orange">in development ... !!!!!!</p>
-
 This page creates an HTML tag that reads the link card to the repository. You can just put it in Markdown's blog.
 
 https://ghlinkcard.com
