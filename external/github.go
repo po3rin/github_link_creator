@@ -38,6 +38,9 @@ func (r *Repository) GetRepoData(ctx context.Context, userName string, repoName 
 	if err != nil {
 		return nil, err
 	}
+	if res.StatusCode != 200 {
+		return nil, fmt.Errorf("Failed to request url: %v, Please make sure repository exits", uri)
+	}
 	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {

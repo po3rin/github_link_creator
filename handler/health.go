@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/po3rin/github_link_creator/lib/env"
+	l "github.com/po3rin/github_link_creator/lib/logger"
 
 	"github.com/gin-gonic/gin"
 )
@@ -28,8 +29,10 @@ func (h *Handler) HealthCheck(c *gin.Context) {
 	case <-doneCh:
 		return
 	case <-ctx.Done():
+		msg := fmt.Sprintf("Processing timed out in %d seconds", env.Timeout)
+		l.Error(msg)
 		c.JSON(http.StatusRequestTimeout, gin.H{
-			"message": fmt.Sprintf("Processing timed out in %d seconds", env.Timeout),
+			"message": msg,
 		})
 	}
 }
