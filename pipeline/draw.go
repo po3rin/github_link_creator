@@ -94,7 +94,7 @@ func (d *drawer) Draw(text string) (img *image.RGBA, err error) {
 	return img, nil
 }
 
-// DrawText draw text.
+// DrawText shorthand to draw text.
 func DrawText(img image.Image, conf config.Text, text string) image.Image {
 	d, _ := NewDrawer(
 		Params{
