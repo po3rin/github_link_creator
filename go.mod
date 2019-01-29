@@ -3,6 +3,7 @@ module github.com/po3rin/github_link_creator
 require (
 	github.com/aws/aws-sdk-go v1.16.26
 	github.com/gin-contrib/sse v0.0.0-20190125020943-a7658810eb74 // indirect
+	github.com/gin-gonic/contrib v0.0.0-20181101072842-54170a7b0b4b
 	github.com/gin-gonic/gin v1.3.0
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 	github.com/golang/protobuf v1.2.0 // indirect

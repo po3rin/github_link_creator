@@ -1,6 +1,7 @@
 package infrastructure
 
 import (
+	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 	"github.com/po3rin/github_link_creator/handler"
 )
@@ -20,6 +21,7 @@ func NewRouter() *Router {
 // InitRouter provide initialized　router
 func (r *Router) InitRouter() *gin.Engine {
 	router := gin.Default()
+	router.Use(static.Serve("/", static.LocalFile("client/dist", true)))
 	router.GET("/v1/health", r.Handler.HealthCheck)
 	router.GET("/v1/images/:user/:repo", r.Handler.GetCode)
 	return router
