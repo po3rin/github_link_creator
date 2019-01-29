@@ -22,7 +22,7 @@ func NewRouter() *Router {
 func (r *Router) InitRouter() *gin.Engine {
 	router := gin.Default()
 	router.Use(static.Serve("/", static.LocalFile("client/dist", true)))
-	router.GET("/v1/health", r.Handler.HealthCheck)
-	router.GET("/v1/images/:user/:repo", r.Handler.GetCode)
+	router.GET("/api/v1/health", r.Handler.HealthCheck)
+	router.GET("/api/v1/images/:user/:repo", r.Handler.GetCode)
 	return router
 }
