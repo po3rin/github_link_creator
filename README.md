@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="GoReleaser Logo" src="gopher.jpg" height="100"/>
+  <img alt="GoReleaser Logo" src="images/gopher.jpg" height="100"/>
   <h3 align="center">GitHub Link Card Creater</h3>
   <p align="center">GitHub Link Card Creator lets you generate GitHub images has links to repositories.</p>
 </p>
@@ -12,7 +12,7 @@
 
 GitHub Link Card Creator lets you generate GitHub images has links to your repositories. This card is useful to guide to your repository in blogs etc.
 
-<a href="https://github.com/po3rin/github_link_creator"><img src="example_card.png" width="460px"/></a>
+<a href="https://github.com/po3rin/github_link_creator"><img src="images/example_card.png" width="460px"/></a>
 
 ## Instalation
 
@@ -47,11 +47,17 @@ When raising the upper limit of API call of GitHub, You should set environment v
 > GitHub REST API v3 Documents
 > https://developer.github.com/v3/#rate-limiting
 
-## Official CLient
+## Official Client
 
-in development ...
+<p style="color:orange">in development ... !!!!!!</p>
+
+This page creates an HTML tag that reads the link card to the repository. You can just put it in Markdown's blog.
 
 https://ghlinkcard.com
+
+Client repository here.
+
+<a href="https://github.com/po3rin/github_link_creator_client"><img src="images/client.png" width="460px"/></a>
 
 ## Contributing
 
