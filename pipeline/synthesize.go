@@ -29,12 +29,12 @@ func SynthesizeToBase(img image.Image) (image.Image, error) {
 	}
 
 	startPointLogo := image.Point{20, 24}
-	logoRectangle := image.Rectangle{startPointLogo, startPointLogo.Add(img.Bounds().Size())}
+	userRectangle := image.Rectangle{startPointLogo, startPointLogo.Add(img.Bounds().Size())}
 	originRectangle := image.Rectangle{image.Point{0, 0}, baseImg.Bounds().Size()}
 
 	rgba := image.NewRGBA(originRectangle)
 	draw.Draw(rgba, originRectangle, baseImg, image.Point{0, 0}, draw.Src)
-	draw.Draw(rgba, logoRectangle, img, image.Point{0, 0}, draw.Over)
+	draw.Draw(rgba, userRectangle, img, image.Point{0, 0}, draw.Over)
 
 	return rgba, nil
 }
