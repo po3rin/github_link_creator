@@ -80,7 +80,6 @@ jobs:
       - run:
           name: Build docker image
           command: |
-            pwd
             cp Dockerfile.prod Dockerfile
             docker build -t $CIRCLE_PROJECT_REPONAME .
 
