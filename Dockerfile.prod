@@ -15,4 +15,5 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /app
 COPY --from=builder /api .
 
+ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["./github_link_creator"]
