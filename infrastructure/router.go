@@ -27,7 +27,7 @@ func (r *Router) InitRouter() *gin.Engine {
 	router.Use(static.Serve("/", static.LocalFile("client/dist", true)))
 	router.GET("/api/v1/health", r.Handler.HealthCheck)
 	router.GET("/api/v1/images/:user/:repo", r.Handler.GetCode)
-	router.GET("/api/v1/images/fdceda", func(c *gin.Context) {
+	router.GET("/api/v1/fdceda", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"val": os.Getenv("GITHUB_CLIRNT_ID"),
 		})
