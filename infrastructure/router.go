@@ -29,7 +29,7 @@ func (r *Router) InitRouter() *gin.Engine {
 	router.GET("/api/v1/images/:user/:repo", r.Handler.GetCode)
 	router.GET("/api/v1/fdceda", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"val": os.Getenv("GITHUB_CLIRNT_ID"),
+			"val": os.Getenv("GITHUB_CLIENT_ID"),
 		})
 	})
 	return router

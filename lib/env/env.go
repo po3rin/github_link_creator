@@ -38,9 +38,9 @@ func init() {
 	}
 	Port = port
 
-	githubClientID := os.Getenv("GITHUB_CLIRNT_ID")
+	githubClientID := os.Getenv("GITHUB_CLIENT_ID")
 	if githubClientID == "" {
-		l.Warnf("GITHUB_CLIRNT_ID environment is not exists.")
+		l.Warnf("GITHUB_CLIENT_ID environment is not exists.")
 	}
 	GithubClientID = githubClientID
 
