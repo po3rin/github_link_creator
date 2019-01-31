@@ -15,5 +15,13 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /app
 COPY --from=builder /api .
 
+RUN apk --update add \
+    python \
+    curl \
+    groff
+
+RUN curl ${pip_installer} | python && \
+    pip install awscli
+
 ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["./github_link_creator"]
