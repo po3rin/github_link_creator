@@ -8,8 +8,8 @@ import (
 )
 
 // DrawText shorthand to draw text.
-func DrawText(img image.Image, c config.Text, text string) image.Image {
-	d, _ := txt2img.NewDrawer(
+func DrawText(img image.Image, c config.Text, text string) (image.Image, error) {
+	d, err := txt2img.NewDrawer(
 		txt2img.Params{
 			Img:               img,
 			FontSize:          c.Size,
@@ -19,6 +19,12 @@ func DrawText(img image.Image, c config.Text, text string) image.Image {
 			TextPosVertical:   c.PosVertical,
 		},
 	)
-	result, _ := d.Draw(text)
-	return result
+	if err != nil {
+		return nil, err
+	}
+	result, err := d.Draw(text)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
