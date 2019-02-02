@@ -1,0 +1,13 @@
+builds:
+  - main: cmd/repoimg/main.go
+    binary: repoimg
+    goos:
+      - windows
+      - darwin
+      - linux
+    goarch:
+      - amd64
+release:
+  github:
+    owner: po3rin
+    name: github_link_creator
