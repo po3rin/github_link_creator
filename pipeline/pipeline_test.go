@@ -18,7 +18,7 @@ func (t *testRepoitory) GetRepoData(ctx context.Context, userName string, repoNa
 	return &entity.Repo{
 		Name:        "po3rin",
 		URL:         "example.com",
-		Description: "this is test",
+		Description: "this is test is this is test is this is test is this is test is this is test is this is test is",
 		Forks:       10,
 		Stars:       10,
 		Owner: entity.User{
