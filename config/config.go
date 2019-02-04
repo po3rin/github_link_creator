@@ -82,3 +82,14 @@ func setFont() {
 	}
 	Font = f
 }
+
+// AdjustFontSize adjust font size
+func (t *Text) AdjustTitleFontSize(text string) {
+	if len(text) > 30 && len(text) < 34 {
+		t.Size = 32
+	} else if len(text) >= 34 && len(text) < 38 {
+		t.Size = 30
+	} else if len(text) >= 38 {
+		t.Size = 28
+	}
+}

@@ -40,6 +40,8 @@ func ProcessingImg(ctx context.Context, r Repoitory, userName string, repoName s
 		return nil, err
 	}
 
+	config.Title.AdjustTitleFontSize(repo.Name)
+
 	img, err = DrawText(synthesizedImg, config.Title, repo.Name)
 	if err != nil {
 		l.Error(err)
