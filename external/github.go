@@ -10,7 +10,6 @@ import (
 
 	"github.com/po3rin/github_link_creator/entity"
 	"github.com/po3rin/github_link_creator/lib/env"
-	l "github.com/po3rin/github_link_creator/lib/logger"
 
 	"github.com/pkg/errors"
 )
@@ -19,7 +18,6 @@ var requestParams string
 
 func init() {
 	if env.GithubClientID == "" || env.GithubSecret == "" {
-		l.Warn("not setted github client id or secret")
 		requestParams = ""
 		return
 	}
