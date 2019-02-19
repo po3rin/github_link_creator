@@ -52,12 +52,17 @@ jobs:
       - checkout
       - setup_remote_docker
       - aws-cli/install
-      - aws-ecr/ecr-login
 
-      - aws-ecr/build_and_push_image:
+      - run:
+          name: cp Dockerfile
+          command: |
+            cp Dockerfile.prod Dockerfile
+
+      - aws-ecr/build-and-push-image:
           region: us-east-1
-          account-url: ${ECR_ENDPOINT}
-          repo: ${CIRCLE_PROJECT_REPONAME}
+          dockerfile: ./Dockerfile
+          account-url: $ECR_ENDPOINT
+          repo: $CIRCLE_PROJECT_REPONAME
           tag: master
 
   deploy_ecs:
@@ -79,8 +84,8 @@ jobs:
               -i $ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:latest
 
 workflows:
-  version: 2.1
-  test:
+  version: 2.0
+  test_build_deploy:
     jobs:
       - test
       - deploy_ecr:
