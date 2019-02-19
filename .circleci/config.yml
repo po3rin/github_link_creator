@@ -61,8 +61,8 @@ jobs:
       - aws-ecr/build-and-push-image:
           region: us-east-1
           dockerfile: ./Dockerfile
-          account-url: $ECR_ENDPOINT
-          repo: $CIRCLE_PROJECT_REPONAME
+          account-url: ECR_ENDPOINT
+          repo: CIRCLE_PROJECT_REPONAME
           tag: master
 
   deploy_ecs:
