@@ -95,10 +95,10 @@ workflows:
             - test
           filters:
             branches:
-              only: master
+              only: release
       - deploy_ecs:
           requires:
             - deploy_ecr
           filters:
             branches:
-              only: master
+              only: release
