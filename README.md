@@ -16,11 +16,9 @@ GitHub Link Card Creator lets you generate GitHub images has links to your repos
 
 ## Instalation
 
-using as CLI, you should install folowing command.
+using as CLI, you should install from following.
 
-```bash
-$ go get github.com/po3rin/github_link_creator/cmd/repoimg
-```
+https://github.com/po3rin/llb2dot/releases
 
 ## Usage
 
