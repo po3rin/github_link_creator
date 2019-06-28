@@ -9,6 +9,7 @@ import (
 	"github.com/po3rin/github_link_creator/config"
 	"github.com/po3rin/github_link_creator/entity"
 	l "github.com/po3rin/github_link_creator/lib/logger"
+	"github.com/po3rin/github_link_creator/processing"
 	"github.com/po3rin/img2circle"
 )
 
@@ -29,12 +30,12 @@ func ProcessingImg(ctx context.Context, r Repoitory, userName string, repoName s
 	if err != nil {
 		return nil, err
 	}
-	cropper, err := img2circle.NewCropper(img2circle.Params{Src: ResizeImg(img)})
+	cropper, err := img2circle.NewCropper(img2circle.Params{Src: processing.ResizeImg(img)})
 	if err != nil {
 		l.Error(err)
 		return nil, err
 	}
-	synthesizedImg, err := SynthesizeToBase(cropper.CropCircle())
+	synthesizedImg, err := processing.SynthesizeToBase(cropper.CropCircle())
 	if err != nil {
 		l.Error(err)
 		return nil, err
@@ -42,13 +43,13 @@ func ProcessingImg(ctx context.Context, r Repoitory, userName string, repoName s
 
 	config.Title.AdjustTitleFontSize(repo.Name)
 
-	img, err = DrawText(synthesizedImg, config.Title, repo.Name)
+	img, err = processing.DrawText(synthesizedImg, config.Title, repo.Name)
 	if err != nil {
 		l.Error(err)
 		return nil, err
 	}
 	if len(repo.Description) < 45 {
-		img, err = DrawText(img, config.FirstDescription, repo.Description)
+		img, err = processing.DrawText(img, config.FirstDescription, repo.Description)
 		if err != nil {
 			l.Error(err)
 			return nil, err
@@ -63,13 +64,13 @@ func ProcessingImg(ctx context.Context, r Repoitory, userName string, repoName s
 		for _, w := range words {
 			firstline += w + " "
 			if len(firstline) >= 40 {
-				img, err = DrawText(img, config.FirstDescription, firstline)
+				img, err = processing.DrawText(img, config.FirstDescription, firstline)
 				if err != nil {
 					l.Error(err)
 					return nil, err
 				}
 				secondline = strings.TrimPrefix(desc, firstline)
-				img, err = DrawText(img, config.SecondDescription, secondline)
+				img, err = processing.DrawText(img, config.SecondDescription, secondline)
 				if err != nil {
 					l.Error(err)
 					return nil, err
@@ -78,12 +79,12 @@ func ProcessingImg(ctx context.Context, r Repoitory, userName string, repoName s
 			}
 		}
 	}
-	img, err = DrawText(img, config.Star, strconv.Itoa(repo.Stars))
+	img, err = processing.DrawText(img, config.Star, strconv.Itoa(repo.Stars))
 	if err != nil {
 		l.Error(err)
 		return nil, err
 	}
-	img, err = DrawText(img, config.Fork, strconv.Itoa(repo.Forks))
+	img, err = processing.DrawText(img, config.Fork, strconv.Itoa(repo.Forks))
 	if err != nil {
 		l.Error(err)
 		return nil, err
