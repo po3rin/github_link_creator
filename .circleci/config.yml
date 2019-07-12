@@ -1,20 +1,17 @@
 version: 2.1
 
+orbs:
+  go-module: timakin/go-module@0.0.5
+  aws-ecr: circleci/aws-ecr@3.0.0
+  aws-cli: circleci/aws-cli@0.1.9
+
 executors:
   test:
     docker:
-      - image: circleci/golang:1.11
+      - image: circleci/golang:1.12
         environment:
           GO111MODULE: "on"
     working_directory: /go/src/github.com/po3rin/github_link_creator
-
-  docker_build:
-    docker:
-      - image: docker:18.05.0-ce
-
-  deploy_ecs:
-    docker:
-      - image: circleci/python
 
 jobs:
   test:
@@ -23,21 +20,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-
-      - restore_cache:
-          name: Restore go modules cache
-          keys:
-            - go-mod-v1-{{ checksum "go.sum" }}
-
-      - run:
-          name: Vendoring
-          command: go mod download
-
-      - save_cache:
-          name: Save go modules cache
-          key: go-mod-v1-{{ checksum "go.sum" }}
-          paths:
-            - "/go/pkg/mod"
+      - go-module/setup
 
       # - run:
       #     name: Setup Code Climate test-reporter
@@ -64,41 +47,31 @@ jobs:
           destination: c.html
 
   deploy_ecr:
-    executor:
-      name: docker_build
+    executor: aws-cli/default
     steps:
       - checkout
       - setup_remote_docker
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-region: AWS_REGION
 
       - run:
-          name: Install awscli for deploy
-          command: |
-            apk add --no-cache --update py-pip
-            pip install --upgrade pip
-            pip install awscli
-
-      - run:
-          name: Build docker image
+          name: cp Dockerfile
           command: |
             cp Dockerfile.prod Dockerfile
-            docker build -t $CIRCLE_PROJECT_REPONAME .
 
-      - deploy:
-          name: deploy for ecs
-          command: |
-            $(aws ecr get-login --no-include-email --region ap-northeast-1)
-            docker tag $CIRCLE_PROJECT_REPONAME:latest $ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:latest
-            docker push $ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:latest
+      - aws-ecr/build-and-push-image:
+          dockerfile: ./Dockerfile
+          account-url: ECR_ENDPOINT
+          repo: $CIRCLE_PROJECT_REPONAME
 
   deploy_ecs:
-    executor:
-      name: deploy_ecs
+    executor: aws-cli/default
     steps:
-      - run:
-          name: install cli
-          command: |
-            sudo pip install awscli
-            sudo apt-get install -y jq
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-region: AWS_REGION
+      - aws-ecr/ecr-login
       - run:
           name: install ecs-deploy
           command: |
@@ -113,8 +86,8 @@ jobs:
               -i $ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:latest
 
 workflows:
-  version: 2.1
-  test:
+  version: 2.0
+  test_build_deploy:
     jobs:
       - test
       - deploy_ecr:
@@ -122,10 +95,10 @@ workflows:
             - test
           filters:
             branches:
-              only: master
+              only: release
       - deploy_ecs:
           requires:
             - deploy_ecr
           filters:
             branches:
-              only: master
+              only: release

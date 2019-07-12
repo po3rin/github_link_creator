@@ -22,7 +22,7 @@ func TestGetRepoData(t *testing.T) {
 			want: &entity.Repo{
 				Name:        "po3rin/gotree",
 				URL:         "https://github.com/po3rin/gotree",
-				Description: "tree command to display go package document. ",
+				Description: "Package gotree lets you display tree with go package document. This helps to understand the role of the package. hidden directory and File is not yet supported.",
 				Forks:       0,
 				Stars:       3,
 				Owner: entity.User{

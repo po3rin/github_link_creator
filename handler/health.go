@@ -20,7 +20,7 @@ func (h *Handler) HealthCheck(c *gin.Context) {
 
 	go func() {
 		c.JSON(http.StatusOK, gin.H{
-			"message": "ok!!",
+			"message": "ok!!!",
 		})
 		doneCh <- struct{}{}
 	}()

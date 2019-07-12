@@ -1,5 +1,7 @@
 .DS_Store
 tmp
-./dist
 repo.png
 github_link_creator
+dist
+.vscode/
+process.yml

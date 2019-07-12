@@ -44,9 +44,10 @@ func (r *Repository) UploadImg(img image.Image, Name string) (string, error) {
 
 	svc := GetS3Uploader()
 	result, err := svc.Upload(&s3manager.UploadInput{
-		Bucket: aws.String("github-link-card"),
-		Key:    aws.String(Name + ".png"),
-		Body:   file,
+		Bucket:      aws.String("github-link-card"),
+		Key:         aws.String(Name + ".png"),
+		Body:        file,
+		ContentType: aws.String("image/png"),
 	})
 	if err != nil {
 		return "", errors.Wrap(err, "failed to upload file")

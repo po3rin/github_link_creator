@@ -29,7 +29,6 @@ func (h *Handler) GetCode(c *gin.Context) {
 				Message:          err.Error(),
 				DocumentationURL: documentationURL,
 			})
-			l.Error(err)
 			doneCh <- struct{}{}
 			return
 		}
