@@ -41,9 +41,6 @@ github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZN
 github.com/po3rin/github_link_creator v0.0.0-20190129163250-528012dde1bb/go.mod h1:nfi745SkAlQ6IaMqB2NcChxCGVMxzCkdxbMO0bYyO2A=
 github.com/po3rin/img2circle v0.1.3 h1:Sq1W4kfj349CC4RwJtFKQzQTQqyR9FUkqvMcBMCCnWI=
 github.com/po3rin/img2circle v0.1.3/go.mod h1:urrRtdq6N6yYBpqPWnU/Of/uxFANXVMbzSK7pzAWzfM=
-github.com/po3rin/text2img v0.0.0-20181105014342-779ba054d6ab h1:ioODAzz490Xhy6MESeTunzRVf30DhVZGzyk/TQLCIl4=
-github.com/po3rin/text2img v0.0.0-20181105014342-779ba054d6ab/go.mod h1:fMsLIlrfPmXfMrnddKPI84Fp1JoIZs+uUmWPneSFNpw=
-github.com/po3rin/text2img v0.0.0-20190125153342-f13055fd3ad8 h1:2Qek1BHmqoKG+fnyRiIDOYQ+4TyXSt1P0UNLXq7wDFg=
 github.com/po3rin/text2img v0.0.0-20190125153342-f13055fd3ad8/go.mod h1:fMsLIlrfPmXfMrnddKPI84Fp1JoIZs+uUmWPneSFNpw=
 github.com/po3rin/txt2img v0.0.0-20190130134856-3fa5cb738517 h1:cy+vQ9ZQQNmvbLLnLsdqmUBB29Dw32sVm40rW4GcmNA=
 github.com/po3rin/txt2img v0.0.0-20190130134856-3fa5cb738517/go.mod h1:DF3YUPC7sv5jaF6Z/q2TENqZxzkI0XvmZMtfW2HXmjM=

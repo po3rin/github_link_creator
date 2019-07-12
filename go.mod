@@ -13,7 +13,6 @@ require (
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/pkg/errors v0.8.1
 	github.com/po3rin/img2circle v0.1.3
-	github.com/po3rin/text2img v0.0.0-20190125153342-f13055fd3ad8
 	github.com/po3rin/txt2img v0.0.0-20190130134856-3fa5cb738517
 	github.com/sirupsen/logrus v1.3.0
 	github.com/stretchr/testify v1.3.0
