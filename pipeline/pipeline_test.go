@@ -50,3 +50,38 @@ func TestProcessingImg(t *testing.T) {
 		t.Fatalf("unexpected error, %v", err.Error())
 	}
 }
+
+func TestNum2StringWithSINortion(t *testing.T) {
+	tests := []struct {
+		name string
+		num  int
+		want string
+	}{
+		{
+			name: "1000000",
+			num:  1000000,
+			want: "1000k",
+		},
+		{
+			name: "100",
+			num:  100,
+			want: "100",
+		},
+		{
+			name: "123456",
+			num:  123456,
+			want: "123k",
+		},
+	}
+
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			got := pipeline.ExportNum2StringWithSINortion(tt.num)
+			if got != tt.want {
+				t.Errorf("unexpected value. want: %v, got: %v\n", tt.want, got)
+			}
+		})
+	}
+}
