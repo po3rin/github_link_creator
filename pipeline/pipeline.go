@@ -79,16 +79,24 @@ func ProcessingImg(ctx context.Context, r Repoitory, userName string, repoName s
 			}
 		}
 	}
-	img, err = processing.DrawText(img, config.Star, strconv.Itoa(repo.Stars))
+	img, err = processing.DrawText(img, config.Star, num2StringWithSINortion(repo.Stars))
 	if err != nil {
 		l.Error(err)
 		return nil, err
 	}
-	img, err = processing.DrawText(img, config.Fork, strconv.Itoa(repo.Forks))
+	img, err = processing.DrawText(img, config.Fork, num2StringWithSINortion(repo.Forks))
 	if err != nil {
 		l.Error(err)
 		return nil, err
 	}
 
 	return img, nil
+}
+
+func num2StringWithSINortion(i int) string {
+	if i > 999 {
+		i = i / 1000
+		return strconv.Itoa(i) + "k"
+	}
+	return strconv.Itoa(i)
 }
