@@ -2,8 +2,8 @@ version: 2.1
 
 orbs:
   go-module: timakin/go-module@0.0.5
-  aws-ecr: circleci/aws-ecr@3.0.0
-  aws-cli: circleci/aws-cli@0.1.9
+  # aws-ecr: circleci/aws-ecr@3.0.0
+  # aws-cli: circleci/aws-cli@0.1.9
 
 executors:
   test:
@@ -46,59 +46,59 @@ jobs:
           path: c.html
           destination: c.html
 
-  deploy_ecr:
-    executor: aws-cli/default
-    steps:
-      - checkout
-      - setup_remote_docker
-      - aws-cli/install
-      - aws-cli/configure:
-          aws-region: AWS_REGION
+  # deploy_ecr:
+  #   executor: aws-cli/default
+  #   steps:
+  #     - checkout
+  #     - setup_remote_docker
+  #     - aws-cli/install
+  #     - aws-cli/configure:
+  #         aws-region: AWS_REGION
 
-      - run:
-          name: cp Dockerfile
-          command: |
-            cp Dockerfile.prod Dockerfile
+  #     - run:
+  #         name: cp Dockerfile
+  #         command: |
+  #           cp Dockerfile.prod Dockerfile
 
-      - aws-ecr/build-and-push-image:
-          dockerfile: ./Dockerfile
-          account-url: ECR_ENDPOINT
-          repo: $CIRCLE_PROJECT_REPONAME
+  #     - aws-ecr/build-and-push-image:
+  #         dockerfile: ./Dockerfile
+  #         account-url: ECR_ENDPOINT
+  #         repo: $CIRCLE_PROJECT_REPONAME
 
-  deploy_ecs:
-    executor: aws-cli/default
-    steps:
-      - aws-cli/install
-      - aws-cli/configure:
-          aws-region: AWS_REGION
-      - aws-ecr/ecr-login
-      - run:
-          name: install ecs-deploy
-          command: |
-            curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee /usr/bin/ecs-deploy
-            sudo chmod +x /usr/bin/ecs-deploy
-      - deploy:
-          name: deploy ecs
-          command: |
-            ecs-deploy -c ghlinkcard-container \
-              -n ghlinkcard \
-              -r ap-northeast-1 --timeout 240 \
-              -i $ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:latest
+  # deploy_ecs:
+  #   executor: aws-cli/default
+  #   steps:
+  #     - aws-cli/install
+  #     - aws-cli/configure:
+  #         aws-region: AWS_REGION
+  #     - aws-ecr/ecr-login
+  #     - run:
+  #         name: install ecs-deploy
+  #         command: |
+  #           curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee /usr/bin/ecs-deploy
+  #           sudo chmod +x /usr/bin/ecs-deploy
+  #     - deploy:
+  #         name: deploy ecs
+  #         command: |
+  #           ecs-deploy -c ghlinkcard-container \
+  #             -n ghlinkcard \
+  #             -r ap-northeast-1 --timeout 240 \
+  #             -i $ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:latest
 
 workflows:
   version: 2.0
   test_build_deploy:
     jobs:
       - test
-      - deploy_ecr:
-          requires:
-            - test
-          filters:
-            branches:
-              only: release
-      - deploy_ecs:
-          requires:
-            - deploy_ecr
-          filters:
-            branches:
-              only: release
+      # - deploy_ecr:
+      #     requires:
+      #       - test
+      #     filters:
+      #       branches:
+      #         only: release
+      # - deploy_ecs:
+      #     requires:
+      #       - deploy_ecr
+      #     filters:
+      #       branches:
+      #         only: release

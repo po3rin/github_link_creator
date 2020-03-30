@@ -4,6 +4,7 @@ import (
 	"image"
 	"image/png"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -26,7 +27,7 @@ func GetS3Uploader() *s3manager.Uploader {
 // UploadImg upload image to s3.
 func (r *Repository) UploadImg(img image.Image, Name string) (string, error) {
 	fileName := strings.Split(Name, "/")[1]
-	filePath := fileName + ".png"
+	filePath := filepath.Join("/tmp", fileName+".png")
 	file, err := os.Create(filePath)
 	if err != nil {
 		return "", errors.Wrap(err, "failed to create file")
@@ -41,6 +42,7 @@ func (r *Repository) UploadImg(img image.Image, Name string) (string, error) {
 	if err != nil {
 		return "", errors.Wrap(err, "failed to open file")
 	}
+	defer file.Close()
 
 	svc := GetS3Uploader()
 	result, err := svc.Upload(&s3manager.UploadInput{
@@ -52,7 +54,7 @@ func (r *Repository) UploadImg(img image.Image, Name string) (string, error) {
 	if err != nil {
 		return "", errors.Wrap(err, "failed to upload file")
 	}
-	err = os.Remove(fileName + ".png")
+	err = os.Remove(filePath)
 	if err != nil {
 		return "", errors.Wrap(err, "failed to delete file")
 	}

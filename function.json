@@ -1,0 +1,25 @@
+{
+    "Environment": {
+        "Variables": {
+            "LAMBDA": "true",
+            "GIN_MODE": "release",
+            "API_PORT": ":8080",
+            "LOG_LEVEL": "ERROR",
+
+            "GITHUB_CLIENT_ID": "{{ must_env `GHCARD_GITHUB_CLIENT_ID` }}",
+            "GITHUB_SECRET": "{{ must_env `GHCARD_GITHUB_SECRET` }}",
+            "S3_BUCKET_NAME": "github-link-card",
+            "SENTRY_DSN": "{{ must_env `GHCARD_SENTRY_DSN` }}"
+        }
+    },
+    "FunctionName": "gh_card",
+    "Handler": "gh_card",
+    "MemorySize": 128,
+    "Role": "{{ must_env `GHCARD_LAMBDA_ROLE` }}",
+    "Runtime": "go1.x",
+    "Timeout": 15,
+    "Code": {
+        "S3Bucket": "github-link-card-lambda-function",
+        "S3Key": "gh_card.zip"
+    }
+}

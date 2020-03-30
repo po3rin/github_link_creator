@@ -20,3 +20,7 @@ test: ## go run test ./...
 
 cover: ## go test ./... -coverprofile=cover.out
 	go test ./... -coverprofile=cover.out && go tool cover -html=cover.out
+
+deploy:
+	GOOS=linux GOARCH=amd64 go build -o gh_card
+	lambroll deploy --region ap-northeast-1

@@ -5,3 +5,6 @@ github_link_creator
 dist
 .vscode/
 process.yml
+gh_card
+infra.env
+infra/.terraform
