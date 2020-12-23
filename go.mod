@@ -3,9 +3,8 @@ module github.com/po3rin/github_link_creator
 go 1.15
 
 require (
-	github.com/apex/gateway v1.1.1
-	github.com/aws/aws-lambda-go v1.15.0 // indirect
-	github.com/aws/aws-sdk-go v1.35.5
+	github.com/apex/gateway v1.1.2
+	github.com/aws/aws-sdk-go v1.36.14
 	github.com/certifi/gocertifi v0.0.0-20200922220541-2c3bb06c6054 // indirect
 	github.com/evalphobia/logrus_sentry v0.8.2
 	github.com/getsentry/raven-go v0.2.0
@@ -22,9 +21,8 @@ require (
 	github.com/po3rin/txt2img v0.0.0-20190712152905-47c0a1bd247a
 	github.com/sirupsen/logrus v1.7.0
 	github.com/stretchr/objx v0.1.1 // indirect
-	github.com/tj/assert v0.0.0-20190920132354-ee03d75cd160 // indirect
 	golang.org/x/image v0.0.0-20200927104501-e162460cd6b5 // indirect
-	golang.org/x/sys v0.0.0-20201007165808-a893ed343c85 // indirect
-	golang.org/x/time v0.0.0-20200630173020-3af7569d3a1e
+	golang.org/x/sys v0.0.0-20201008063127-280f808b4a53 // indirect
+	golang.org/x/time v0.0.0-20201208040808-7e3f01d25324
 	gopkg.in/go-playground/validator.v8 v8.18.2 // indirect
 )
