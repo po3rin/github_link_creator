@@ -26,7 +26,7 @@ func TestGetRepoData(t *testing.T) {
 				Forks:       0,
 				Stars:       3,
 				Owner: entity.User{
-					AvatarURL: "https://avatars1.githubusercontent.com/u/29445112?v=4",
+					AvatarURL: "https://avatars.githubusercontent.com/u/29445112?v=4",
 				},
 			},
 			expecterr: false,
