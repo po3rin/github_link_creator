@@ -1,18 +1,18 @@
 module github.com/po3rin/github_link_creator
 
-go 1.16
+go 1.17
 
 require (
 	cloud.google.com/go v0.82.0 // indirect
 	cloud.google.com/go/bigquery v1.18.0 // indirect
 	github.com/VividCortex/ewma v1.2.0 // indirect
 	github.com/apex/gateway v1.1.2
-	github.com/aws/aws-sdk-go v1.38.30
+	github.com/aws/aws-sdk-go v1.40.49
 	github.com/certifi/gocertifi v0.0.0-20200922220541-2c3bb06c6054 // indirect
 	github.com/evalphobia/logrus_sentry v0.8.2
 	github.com/getsentry/raven-go v0.2.0
 	github.com/gin-contrib/cors v1.3.1
-	github.com/gin-gonic/gin v1.7.1
+	github.com/gin-gonic/gin v1.7.4
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/hirosassa/bqiam v0.3.0 // indirect
@@ -36,8 +36,7 @@ require (
 	github.com/stretchr/objx v0.1.1 // indirect
 	github.com/vbauerster/mpb/v5 v5.4.0 // indirect
 	golang.org/x/image v0.0.0-20200927104501-e162460cd6b5 // indirect
-	golang.org/x/net v0.0.0-20210510120150-4163338589ed // indirect
-	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba
+	golang.org/x/time v0.0.0-20210723032227-1f47c861a9ac
 	google.golang.org/api v0.47.0 // indirect
 	google.golang.org/genproto v0.0.0-20210518161634-ec7691c0a37d // indirect
 	google.golang.org/grpc v1.38.0 // indirect
