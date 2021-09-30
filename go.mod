@@ -7,12 +7,12 @@ require (
 	cloud.google.com/go/bigquery v1.18.0 // indirect
 	github.com/VividCortex/ewma v1.2.0 // indirect
 	github.com/apex/gateway v1.1.2
-	github.com/aws/aws-sdk-go v1.40.49
+	github.com/aws/aws-sdk-go v1.40.52
 	github.com/certifi/gocertifi v0.0.0-20200922220541-2c3bb06c6054 // indirect
 	github.com/evalphobia/logrus_sentry v0.8.2
 	github.com/getsentry/raven-go v0.2.0
 	github.com/gin-contrib/cors v1.3.1
-	github.com/gin-gonic/gin v1.7.4
+	github.com/gin-gonic/gin v1.7.0
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/hirosassa/bqiam v0.3.0 // indirect
